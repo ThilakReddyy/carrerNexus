@@ -46,18 +46,30 @@ export default function Home() {
               </form>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-              <div className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100">
+              <Link
+                href="/jobs?search=Software Engineer"
+                className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100"
+              >
                 Software Engineer
-              </div>
-              <div className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100">
+              </Link>
+              <Link
+                href="/jobs?search=Data Scientist"
+                className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100"
+              >
                 Data Scientist
-              </div>
-              <div className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100">
+              </Link>
+              <Link
+                href="/jobs?search=Data Scientist"
+                className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100"
+              >
                 Product Manager
-              </div>
-              <div className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100">
+              </Link>
+              <Link
+                href="/jobs?experience_word=intern"
+                className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100"
+              >
                 Internships
-              </div>
+              </Link>
             </div>
           </div>
         </div>
