@@ -68,13 +68,13 @@ export default function RootLayout({
             <nav className="sm:ml-auto flex gap-4 sm:gap-6">
               <Link
                 className="text-xs hover:underline underline-offset-4"
-                href="/terms"
+                href="/terms-of-service"
               >
                 Terms of Service
               </Link>
               <Link
                 className="text-xs hover:underline underline-offset-4"
-                href="/privacy"
+                href="/privacy-policy"
               >
                 Privacy Policy
               </Link>
