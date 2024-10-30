@@ -3,24 +3,22 @@ import { Input } from "@/components/ui/input";
 
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Building2Icon, MapPinIcon, Share2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const Jobs = () => {
-  const searchParams = useSearchParams();
   const [search, setSearch] = useState<string>("");
-
-  useEffect(() => {
-    let search = searchParams.get("search");
-    if (search == null || search == undefined) {
-      search = "";
-    }
-    setSearch(search);
-  }, [searchParams]);
-
+  // const searchParams = useSearchParams();
+  // useEffect(() => {
+  //   let search = searchParams.get("search");
+  //   if (search == null || search == undefined) {
+  //     search = "";
+  //   }
+  //   setSearch(search);
+  // }, [searchParams]);
+  //
   return (
     <div className="flex">
       <div className="m-2 p-4 w-[300px] border rounded-lg h-[calc(100vh-68px)] flex flex-col bg-white hidden">
