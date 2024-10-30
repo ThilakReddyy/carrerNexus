@@ -77,3 +77,8 @@
   height: 120px;
   object-fit: contain;
 }
+.jobsimage {
+  width: 40px;
+  height: 34px;
+  object-fit: contain;
+}
