@@ -1,7 +1,21 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Jobs = () => {
+  const searchParams = useSearchParams();
+  const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    let search = searchParams.get("search");
+    if (search == null || search == undefined) {
+      search = "";
+    }
+    setSearch(search);
+  }, [searchParams]);
+
   return (
     <div className="flex ">
       <div className="m-2 p-4 w-[300px] border rounded-lg h-[calc(100vh-68px)] flex flex-col">
@@ -15,7 +29,10 @@ const Jobs = () => {
           <Input
             placeholder="What do you want to do?"
             className="h-12 focus:border-blue-600 focus-visible:ring-blue-600"
-            value={"Software Engineer"}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            value={search}
           />
         </div>
         <div className="py-4 border-b">
@@ -26,6 +43,7 @@ const Jobs = () => {
               <button className="pl-2">x</button>
             </div>
             <Input
+              onChange={() => {}}
               placeholder="Which location(s) do you prefer?"
               className="h-10 focus:border-blue-600 focus-visible:ring-blue-600"
               value={""}
