@@ -1,139 +1,198 @@
 "use client";
-import { Input } from "@/components/ui/input";
-
-import { Separator } from "@/components/ui/separator";
-import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Building2Icon, MapPinIcon, Share2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
-const Jobs = () => {
-  const [search, setSearch] = useState<string>("");
-  // const searchParams = useSearchParams();
-  // useEffect(() => {
-  //   let search = searchParams.get("search");
-  //   if (search == null || search == undefined) {
-  //     search = "";
-  //   }
-  //   setSearch(search);
-  // }, [searchParams]);
-  //
+interface JobDetail {
+  job_id: string;
+  title: string;
+  company: string;
+  experience: number;
+  experience_word: string;
+  remote: string;
+  posted_date: string; // ISO 8601 date string
+  link: string;
+  expired: boolean;
+  locations: string[];
+  abouts: string[];
+  qualifications: string[];
+  responsibilities: string[];
+  preferredqualifications: string[];
+  minqualifications: string[];
+}
+
+const JobTitle = ({
+  job,
+  selected,
+  handleSelectedJob,
+}: {
+  job: JobDetail;
+  selected: boolean;
+  handleSelectedJob: (job: JobDetail) => void;
+}) => {
   return (
-    <div className="flex">
-      <div className="m-2 p-4 w-[300px] border rounded-lg h-[calc(100vh-68px)] flex flex-col bg-white hidden">
-        <div className="py-2 border-b  text-sm flex justify-between items-center">
-          <div className="font-bold text-lg">Filters</div>
-          <div className="text-blue-600 font-semibold text-xs cursor-pointer">
-            Clear all
+    <div
+      className={`w-full  p-4 rounded border  flex bg-white gap-2 ${selected ? "border-blue-500" : "border-[#dadce0]"}`}
+      onClick={() => handleSelectedJob(job)}
+    >
+      <div className="flex flex-col gap-6 text-sm justify-between font-medium w-full ">
+        <div className="flex justify-between w-full">
+          <div className="cursor-pointer">{job?.title}</div>
+          <div className="cursor-pointer">
+            <Share2Icon size={16} />
           </div>
         </div>
+        <div className="flex items-center gap-10 mr-4   ">
+          <div className="flex gap-2 text-xs  font-normal justify-center cursor-pointer">
+            <Building2Icon size={16} /> <span>{job?.company}</span>
+          </div>
+          {/* {jobDetail.locations.length > 0 && ( */}
+          <div className="flex gap-1 text-xs  font-normal justify-center">
+            <MapPinIcon size={16} />
+            <span className="cursor-pointer">{job?.locations[0]}</span>
+          </div>
 
-        <div className="py-4 ">
-          <Input
-            placeholder="What do you want to do?"
-            className="h-12 focus:border-blue-600 focus-visible:ring-blue-600"
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-            value={search}
-          />
+          {/* )} */}
         </div>
-        <Separator />
-        <div className="py-4">
-          <div className="">
-            <div className="font-semibold text-md">Locations</div>
-            <div className="border border-gray-200 px-2 rounded-full font-normal w-fit m-2 ml-0 py-1 text-[75%]">
-              Hyderabad, Telangana
-              <button className="pl-2">x</button>
-            </div>
-            <Input
-              onChange={() => {}}
-              placeholder="Which location(s) do you prefer?"
-              className="h-10 focus:border-blue-600 focus-visible:ring-blue-600"
-              value={""}
-            />
-          </div>
-        </div>
-
-        <Separator />
-        <div className="py-4">
-          <div className="font-semibold text-md pb-4">Experience</div>
-
-          <Slider min={0} max={30} step={1} className="mt-2" />
-          <div className="flex justify-between text-sm text-gray-500 mt-1">
-            <span>0 years</span>
-            <span>30+ years</span>
-          </div>
-        </div>
-        <div></div>
-        <div>{/*Status live or expired*/}</div>
-        <div>{/*date posted*/}</div>
-        <div>{/*Full time or intern */}</div>
-      </div>
-      <div className="flex w-full">
-        <div className="overflow-y-auto  rounded bg-gray-50  m-2 p-2 w-full md:w-[400px]  h-[91vh] flex flex-col gap-4">
-          <div className="w-full  p-4 rounded border border-[#dadce0] flex bg-white gap-2">
-            <div className="flex flex-col gap-6 text-sm justify-between font-medium w-full ">
-              <div className="flex justify-between w-full">
-                <div>Product Management II</div>
-                <div className="cursor-pointer">
-                  <Share2Icon size={16} />
-                </div>
-              </div>
-              <div className="flex items-center gap-10 mr-4   ">
-                <div className="flex gap-2 text-xs  font-normal justify-center">
-                  <Building2Icon size={16} /> <span>Google</span>
-                </div>
-                {/* {jobDetail.locations.length > 0 && ( */}
-                <div className="flex gap-1 text-xs  font-normal justify-center">
-                  <MapPinIcon size={16} />
-                  <span>Hyderabad,India</span>
-                </div>
-
-                {/* )} */}
-              </div>
-              <div>
-                <Button className="text-xs w-[80px] h-[35px] ">
-                  <Link href="/" target="_blank">
-                    Apply
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="w-full  p-4 rounded border border-[#dadce0] flex bg-white gap-2">
-            <div className="flex flex-col gap-6 text-sm justify-between font-medium w-full ">
-              <div className="flex justify-between w-full">
-                <div>Product Management II</div>
-                <div className="cursor-pointer">
-                  <Share2Icon size={16} />
-                </div>
-              </div>
-              <div className="flex items-center gap-10 mr-4   ">
-                <div className="flex gap-2 text-xs  font-normal justify-center">
-                  <Building2Icon size={16} /> <span>Google</span>
-                </div>
-                {/* {jobDetail.locations.length > 0 && ( */}
-                <div className="flex gap-1 text-xs  font-normal justify-center">
-                  <MapPinIcon size={16} />
-                  <span>Hyderabad,India</span>
-                </div>
-
-                {/* )} */}
-              </div>
-              <div>
-                <Button className="text-xs w-[80px] h-[35px] ">
-                  <Link href="/" target="_blank">
-                    Apply
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+        <div>
+          <Button className="text-xs w-[80px] h-[35px] ">
+            <Link href={job?.link || "/"} target="_blank">
+              Apply
+            </Link>
+          </Button>
         </div>
       </div>
     </div>
   );
 };
-export default Jobs;
+
+const Jobs = () => {
+  const [, setSearch] = useState<string>("");
+  const [jobs, setJobs] = useState<JobDetail[]>([]);
+  const searchParams = useSearchParams();
+  const scrollableRef = useRef<HTMLDivElement | null>(null);
+  const [selectedJob, setSelectedJob] = useState<JobDetail | undefined>(
+    undefined,
+  );
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const handleSelectedJob = (job: JobDetail) => {
+    setSelectedJob(job);
+  };
+  useEffect(() => {
+    let searchParam = searchParams.get("search");
+    if (searchParam == null || searchParam == undefined) {
+      searchParam = "";
+    }
+    setSearch(searchParam);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const loader = async () => {
+      const pageSize = "10";
+      const pagination = "page=" + page.toString() + "&pageSize=" + pageSize;
+      try {
+        const url =
+          "https://jobss.up.railway.app/job_opportunities?" + pagination;
+        const response = await axios.get(url);
+        if (response.status === 200) {
+          console.log([...jobs, ...response?.data.jobs]);
+          setJobs([...jobs, ...response?.data.jobs]);
+          console.log(response.data.totalPages);
+          setTotalPages(response.data.totalPages);
+          if (response?.data.jobs.length > 0 && !selectedJob) {
+            setSelectedJob(response?.data.jobs[0]);
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    loader();
+  }, [page]);
+  useEffect(() => {
+    console.log("totalPages", totalPages);
+  }, [totalPages]);
+
+  useEffect(() => {
+    const scrollableElement = scrollableRef.current;
+
+    const handleScroll = () => {
+      console.log(scrollableRef);
+      console.log(
+        scrollableElement?.scrollHeight,
+        scrollableElement?.scrollTop,
+        scrollableElement?.clientHeight,
+      );
+      if (
+        scrollableElement &&
+        scrollableElement.scrollHeight - scrollableElement.scrollTop ===
+          scrollableElement.clientHeight
+      ) {
+        onScrollEnd();
+      }
+    };
+
+    if (scrollableElement) {
+      scrollableElement.addEventListener("scroll", handleScroll);
+    }
+
+    // Cleanup listener on unmount
+    return () => {
+      if (scrollableElement) {
+        scrollableElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+
+  const incrementPage = () => {
+    // if (page < totalPages) {
+    setPage((page) => page + 1);
+    // }
+  };
+
+  const onScrollEnd = () => {
+    console.log("Reached the end of the scrollable element");
+    incrementPage();
+    // Add your logic here
+  };
+
+  return (
+    <div className="flex">
+      <div className="flex  w-full">
+        <div className="  rounded bg-gray-50  m-2  p-2 pr-0 w-full md:w-[400px]  h-[84vh] flex flex-col gap-4 ">
+          <div
+            className="overflow-y-auto gap-4 flex flex-col pr-2"
+            ref={scrollableRef}
+          >
+            {jobs.length > 0 &&
+              jobs.map((job: JobDetail, index: number) => {
+                return (
+                  <JobTitle
+                    key={index}
+                    job={job}
+                    selected={
+                      (selectedJob && job.job_id === selectedJob.job_id) ||
+                      false
+                    }
+                    handleSelectedJob={handleSelectedJob}
+                  />
+                );
+              })}
+          </div>
+        </div>
+        <div className="bg-gray-100 overflow-y-hidden rounded m-2 p-2 flex-grow"></div>
+      </div>
+    </div>
+  );
+};
+export default function JobsPage() {
+  return (
+    <Suspense fallback={<div>Loading Jobs...</div>}>
+      <Jobs />
+    </Suspense>
+  );
+}
