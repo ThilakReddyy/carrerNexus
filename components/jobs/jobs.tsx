@@ -13,6 +13,7 @@ const Jobs = () => {
 
   const experience_word = searchParams.get("experience_word");
   const title = searchParams.get("search");
+  const company = searchParams.get("company");
 
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState<JobDetail[]>([]);
@@ -34,9 +35,12 @@ const Jobs = () => {
           query += "&experience_word=intern";
         }
         if (title && title !== "") {
-          query += "title=" + title;
+          query += "&title=" + title;
         }
-        const url = `https://jobss.up.railway.app/job_opportunities?${pagination}&${query}`;
+        if (company && company !== "") {
+          query += "&company=" + company;
+        }
+        const url = `https://jobss.up.railway.app/job_opportunities?${pagination}${query}`;
         const response = await axios.get(url);
         if (response.status === 200) {
           setJobs((prevJobs) => {

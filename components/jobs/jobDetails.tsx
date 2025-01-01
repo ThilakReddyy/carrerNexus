@@ -1,7 +1,7 @@
 import { JobDetail } from "@/types";
-import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 const JobDetails = ({ selectedJob }: { selectedJob: JobDetail }) => {
   console.log(selectedJob);
@@ -10,8 +10,15 @@ const JobDetails = ({ selectedJob }: { selectedJob: JobDetail }) => {
     <div className="hidden lg:block  flex-grow mx-4 overflow-y-auto  h-[83vh] mt-4 max-w-[70%]">
       <div className="pb-2 rounded-b border-t-4 border-blue-500 dark:bg-gray-900  w-full bg-gray-100 ">
         <div className="m-8 flex">
-          <div className="border-gray-500 dark:bg-gray-900 border  h-fit  bg-white p-4 w-fit rounded">
-            <Skeleton className="h-20 w-20" />
+          <div className="border-gray-500 dark:bg-gray-900 border  h-fit  bg-white p-4 w-fit rounded ">
+            <div className="h-20 w-20 flex justify-center items-center">
+              <Image
+                src={`/${selectedJob.company.toLowerCase()}icon.png`}
+                width={80}
+                height={80}
+                alt={`${selectedJob.company.toLowerCase()}icon`}
+              />
+            </div>
           </div>
           <div className="text-lg font-medium mx-8 flex items-center">
             <div>
