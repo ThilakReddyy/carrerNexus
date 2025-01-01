@@ -39,7 +39,7 @@ const JobTitle = ({
             <Button className="text-xs w-[80px] h-[35px] ">Apply</Button>
           </Link>
           {job.expired && (
-            <div className="text-red-800 opacity-90 rounded  h-6 px-2 text-center justify-center flex">
+            <div className="text-red-800 text-[6px] opacity-90 rounded  h-6 px-2 text-center items-end justify-center flex">
               Expired
             </div>
           )}

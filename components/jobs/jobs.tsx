@@ -30,7 +30,7 @@ const Jobs = () => {
       const pageSize = "10";
       const pagination = `page=${page}&pageSize=${pageSize}`;
       try {
-        let query = "";
+        let query = "&location_name=India";
         if (experience_word === "intern") {
           query += "&experience_word=intern";
         }
