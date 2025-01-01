@@ -13,7 +13,7 @@ export const companies = [
   },
   {
     name: "Microsoft",
-    icon: "/microsoftlogo.png",
+    icon: "/microsofticon.png",
   },
   {
     name: "Apple",
