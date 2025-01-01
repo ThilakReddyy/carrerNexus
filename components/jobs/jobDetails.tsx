@@ -7,7 +7,7 @@ const JobDetails = ({ selectedJob }: { selectedJob: JobDetail }) => {
   console.log(selectedJob);
 
   return (
-    <div className="hidden lg:block  flex-grow mx-4 overflow-y-auto  h-[83vh] mt-4 max-w-[70%]">
+    <div className="hidden lg:block  flex-grow mx-4 overflow-y-auto  h-[83vh] mt-4 ">
       <div className="pb-2 rounded-b border-t-4 border-blue-500 dark:bg-gray-900  w-full bg-gray-100 ">
         <div className="m-8 flex">
           <div className="border-gray-500 dark:bg-gray-900 border  h-fit  bg-white p-4 w-fit rounded ">

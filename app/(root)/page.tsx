@@ -40,7 +40,7 @@ export default function Home() {
             <div className="w-full max-w-sm space-y-2">
               <form className="flex space-x-2" onSubmit={handleSearch}>
                 <Input
-                  className={`max-w-lg flex-1 ${input === "" && "border-red-400"} shadow-lg`}
+                  className={`max-w-lg flex-1 ${input === "" && "border-red-400 shadow-lg"} `}
                   placeholder="Enter job title, skills, or company"
                   type="text"
                   onChange={(e) => {
