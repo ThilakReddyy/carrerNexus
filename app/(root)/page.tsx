@@ -12,11 +12,12 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const companyName = "Carrer Nexus";
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string | null>(null);
   const router = useRouter(); // Initialize router
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (input === "") {
+    if (!input || input === "") {
+      setInput("");
       return;
     }
     router.push(`/jobs?search=${encodeURIComponent(input)}`);
@@ -39,7 +40,7 @@ export default function Home() {
             <div className="w-full max-w-sm space-y-2">
               <form className="flex space-x-2" onSubmit={handleSearch}>
                 <Input
-                  className="max-w-lg flex-1"
+                  className={`max-w-lg flex-1 ${input === "" && "border-red-400"} shadow-lg`}
                   placeholder="Enter job title, skills, or company"
                   type="text"
                   onChange={(e) => {
