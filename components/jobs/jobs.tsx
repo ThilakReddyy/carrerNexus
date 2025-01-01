@@ -95,7 +95,6 @@ const Jobs = () => {
 
   useEffect(() => {
     if (!selectedJob && jobs.length > 0) {
-      console.log(selectedJob);
       setSelectedJob(jobs[0]);
     }
   }, [jobs, selectedJob]);

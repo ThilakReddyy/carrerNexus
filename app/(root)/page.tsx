@@ -8,10 +8,19 @@ import { featuresList } from "@/constants/features";
 import Image from "next/image";
 import { companies } from "@/constants/companies";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const companyName = "Carrer Nexus";
   const [input, setInput] = useState("");
+  const router = useRouter(); // Initialize router
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (input === "") {
+      return;
+    }
+    router.push(`/jobs?search=${encodeURIComponent(input)}`);
+  };
   return (
     <div>
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-white to-gray-100 flex justify-center">
@@ -28,7 +37,7 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full max-w-sm space-y-2">
-              <form className="flex space-x-2">
+              <form className="flex space-x-2" onSubmit={handleSearch}>
                 <Input
                   className="max-w-lg flex-1"
                   placeholder="Enter job title, skills, or company"
@@ -37,12 +46,10 @@ export default function Home() {
                     setInput(e.target.value);
                   }}
                 />
-                <Link href={`/jobs?search=${encodeURIComponent(input)}`}>
-                  <Button type="submit">
-                    <Search className="mr-2 h-4 w-4" />
-                    Search
-                  </Button>
-                </Link>
+                <Button type="submit">
+                  <Search className="mr-2 h-4 w-4" />
+                  Search
+                </Button>
               </form>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
