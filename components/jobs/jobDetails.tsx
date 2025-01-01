@@ -121,14 +121,16 @@ const JobDetails = ({ selectedJob }: { selectedJob: JobDetail }) => {
             </div>
           )}
         </div>
-        <div className=" p-8 pt-4 rounded-b my-1 dark:bg-gray-900 rounded  w-full bg-gray-100 ">
-          <div className="font-semibold  text-lg">Responsibilities</div>
-          <ul className=" pl-8 pt-1 list-disc">
-            {selectedJob.responsibilities.map((responsibility: string) => {
-              return <li key={responsibility}>{responsibility}</li>;
-            })}
-          </ul>
-        </div>
+        {selectedJob.responsibilities.length > 0 && (
+          <div className=" p-8 pt-4 rounded-b my-1 dark:bg-gray-900 rounded  w-full bg-gray-100 ">
+            <div className="font-semibold  text-lg">Responsibilities</div>
+            <ul className=" pl-8 pt-1 list-disc">
+              {selectedJob.responsibilities.map((responsibility: string) => {
+                return <li key={responsibility}>{responsibility}</li>;
+              })}
+            </ul>
+          </div>
+        )}
         <div className=" p-8 rounded-b my-1 dark:bg-gray-900 rounded  w-full bg-gray-100 ">
           <div className="font-semibold  text-lg"> About the job:</div>
           <ul className=" pl-4 pt-1">
