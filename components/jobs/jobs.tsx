@@ -12,6 +12,7 @@ const Jobs = () => {
   const scrollableRef = useRef<HTMLDivElement | null>(null);
 
   const experience_word = searchParams.get("experience_word");
+  const title = searchParams.get("search");
 
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState<JobDetail[]>([]);
@@ -32,6 +33,9 @@ const Jobs = () => {
         if (experience_word === "intern") {
           query += "&experience_word=intern";
         }
+        if (title && title !== "") {
+          query += "title=" + title;
+        }
         const url = `https://jobss.up.railway.app/job_opportunities?${pagination}&${query}`;
         const response = await axios.get(url);
         if (response.status === 200) {
@@ -45,9 +49,6 @@ const Jobs = () => {
             return uniqueJobs;
           });
           setTotalPages(response.data.totalPages);
-          if (response.data.jobs.length > 0 && page !== 1) {
-            handleSelectedJob(response.data.jobs[0]);
-          }
         }
       } catch (e) {
         console.error(e);
@@ -90,6 +91,7 @@ const Jobs = () => {
 
   useEffect(() => {
     if (!selectedJob && jobs.length > 0) {
+      console.log(selectedJob);
       setSelectedJob(jobs[0]);
     }
   }, [jobs, selectedJob]);

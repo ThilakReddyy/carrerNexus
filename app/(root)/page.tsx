@@ -59,7 +59,7 @@ export default function Home() {
                 Data Scientist
               </Link>
               <Link
-                href="/jobs?search=Data Scientist"
+                href="/jobs?search=Product Manager"
                 className="text-[75%] font-bold items-center p-1 px-2 cursor-pointer hover:bg-black border border-transparent rounded-full hover:text-white bg-gray-100"
               >
                 Product Manager
