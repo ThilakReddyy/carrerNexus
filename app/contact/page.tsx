@@ -71,7 +71,7 @@ export default function ContactPage() {
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="h-5 w-5 mr-2 text-primary" />
-                <span>thilakreddy19102000@gmail.com</span>
+                <span>contact@carrernexus.com</span>
               </div>
 
               <div className="flex items-center">
