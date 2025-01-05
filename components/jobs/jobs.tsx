@@ -6,6 +6,15 @@ import JobTitle from "./jobTitle";
 import RotatingLoader from "../rotatingLoader";
 import JobDetails from "./jobDetails";
 import { useSearchParams } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { SelectLabel } from "@radix-ui/react-select";
 
 const Jobs = () => {
   const searchParams = useSearchParams();
@@ -61,6 +70,8 @@ const Jobs = () => {
       }
     };
     loader();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   useEffect(() => {
@@ -112,37 +123,71 @@ const Jobs = () => {
   }
 
   return (
-    <div className="flex">
-      <div className="flex  w-full">
-        <div className="rounded bg-gray-50  m-2  p-2 pr-0 w-full lg:w-[400px]  h-[84vh] flex flex-col gap-4 ">
-          <div className="overflow-y-auto gap-4 flex flex-col pr-2">
-            <div
-              className="overflow-y-auto gap-4 flex flex-col pr-2 lg:w-[380px] "
-              ref={scrollableRef}
-            >
-              {jobs.length > 0 &&
-                jobs.map((job: JobDetail) => {
-                  return (
-                    <JobTitle
-                      key={job.job_id}
-                      job={job}
-                      selected={
-                        (selectedJob && job.job_id === selectedJob.job_id) ||
-                        false
-                      }
-                      handleSelectedJob={handleSelectedJob}
-                    />
-                  );
-                })}
-              {page <= totalPages && (
-                <div className="text-center">
-                  <RotatingLoader />
-                </div>
-              )}
+    <div>
+      <div className=" p-2 rounded  bg-gray-50 dark:bg-gray-800 mx-2">
+        <div className="h-14 dark:border-gray-700 bg-white border w-full p-2 rounded-md dark:bg-gray-900 overflow-y-none overflow-x-none scroll-smooth no-scrollbar">
+          <div className="md:justify-normal justify-around lg:flex items-center grid grid-cols-3 overflow-x-none">
+            <div className="flex justify-center md:px-2">
+              <Select>
+                <SelectTrigger className="min-w-[100px] w-fit h-8 bg-blue-500 text-white font-semibold text-xs rounded-full">
+                  <SelectValue placeholder="Internship" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="intern">Internship</SelectItem>
+                  <SelectGroup>
+                    <SelectItem value="fulltime">Full-Time</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex justify-center border-x md:px-2 ">
+              <Select>
+                <SelectTrigger className="w-fit min-w-[100px] h-8 text-xs rounded-full bg-transparent">
+                  <SelectValue placeholder="Date" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="date">Date</SelectItem>
+                    <SelectItem value="relevance">Relavance</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
-        {selectedJob && <JobDetails selectedJob={selectedJob} />}
+      </div>
+      <div className="flex">
+        <div className="flex  w-full">
+          <div className="rounded bg-gray-50  m-2  p-2 pr-0 w-full lg:w-[400px]  h-[84vh] flex flex-col gap-4 ">
+            <div className="overflow-y-auto gap-4 flex flex-col pr-2">
+              <div
+                className="overflow-y-auto gap-4 flex flex-col pr-2 lg:w-[380px] "
+                ref={scrollableRef}
+              >
+                {jobs.length > 0 &&
+                  jobs.map((job: JobDetail) => {
+                    return (
+                      <JobTitle
+                        key={job.job_id}
+                        job={job}
+                        selected={
+                          (selectedJob && job.job_id === selectedJob.job_id) ||
+                          false
+                        }
+                        handleSelectedJob={handleSelectedJob}
+                      />
+                    );
+                  })}
+                {page <= totalPages && (
+                  <div className="text-center">
+                    <RotatingLoader />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          {selectedJob && <JobDetails selectedJob={selectedJob} />}
+        </div>
       </div>
     </div>
   );
