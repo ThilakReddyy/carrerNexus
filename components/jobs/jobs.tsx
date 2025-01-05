@@ -14,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { SelectLabel } from "@radix-ui/react-select";
 
 const Jobs = () => {
   const searchParams = useSearchParams();
