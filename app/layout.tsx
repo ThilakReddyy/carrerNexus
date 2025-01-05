@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Briefcase } from "lucide-react";
+import GoogleAnalytics from "@/components/analytics/googleAnalytics";
 
 const inter = Inter({ subsets: ["latin"] });
 const companyName = "Carrer Nexus";
@@ -20,6 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <GoogleAnalytics />
+
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <header className="px-4 lg:px-6 h-14 flex items-center border-b">
